@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourisum Blog</title>
+    <!-- ---------Font Awsome CDN-------------- -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- ----X-----Font Awsome CDN----X-------- -->
+
+    <!-- ----------Google Fonts---------------- -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&display=swap" rel="stylesheet">
+    <!-- -------X---Google Fonts------X-------- -->
+
+    <!-- ---------External Style Sheet--------- -->
+        <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <!-- -----X---External Style Sheet----X---- -->
+</head>
+<body>
+
+    <!-- ---------------Navigation Menu---------------------- -->
+        <nav class="nav-bar">
+            <div class="nav-menu d-flex">
+                <div class="nav-brand">
+                    <a href="{% url 'home' %}">Tourisum <p>Blog</p></a>
+                </div>
+                <div class="toggle" id="nav-toggle">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </div>
+                <div class="nav-collaps">
+                    <ul class="nav-items">
+                        <li class="nav-link">
+                            <a href="{% url "home" %}">Home</a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="{% url "home" %}#about">About us</a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="{% url "home" %}#blog">Blog</a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="{% url "home" %}#contact-us">Countact us</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-collaps">
+                    <ul class="nav-social">
+                        <li class="nav-link">
+                            <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="https://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="https://www.linkedin.com"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    <!-- ---------X------Navigation Menu--------x------------ -->
+
+    <!-- -----------------Blog Path------------------------ -->
+        <div class="blog-path">
+            <div class="blog-path-row">
+                <ul>
+                    <li>
+                        <a href="{% url "home" %}">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">/</a>
+                    </li>
+                    <li>
+                        <a href="{% url "home" %}#blog">Blog</a>
+                    </li>
+                    <li>
+                        <a href="#">/</a>
+                    </li>
+                    <li>
+                        <a href="{% url "blog_page" blog_id=blog_post.id %}">{{blog_post.BLGheader}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <!-- ---------X-------Blog Path------X----------------- -->
+
+    <!-- ------------------Blog Body----------------------- -->
+        <div class="blog-post">
+            <div class="blog-left-body">
+                <!-- Blog Post -->
+                    <div class="blog-post-body">
+                        <div class="blog-post-img">
+                            <img src="{{ blog_post.BLGimage.url }}" alt="">
+                        </div>
+                        <div class="blog-post-detailes">
+                            <h3>{{blog_post.BLGtitle}}</h3>
+                            <ul>
+                                <li style="color:#777777;"><i class="fa fa-user" aria-hidden="true"></i> <span>{{blog_post.BLGcreator}}</span></li>
+                                <li style="color:#777777;"><i class="fa fa-clock-o" aria-hidden="true"></i> <span>{{blog_post.BLGdate|date:"M d, Y" }}</span></li>
+                                <li style="color:#777777;"><i class="fa fa-commenting-o" aria-hidden="true"></i> <span>32</span></li>
+                            </ul>
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;{{blog_post.BLGcontent}}<br><br>
+                            {% for prg in prgs %}
+                            
+                            {%  if prg.PARtitle and not prg.PARcontent and not prg.PARimage %}
+                                <br><br>
+                                <b>{{prg.PARtitle}}</b>                            
+
+                            {%  elif prg.PARtitle and prg.PARcontent and not prg.PARimage %}
+                                <br><br>
+                                <b>{{prg.PARtitle}}</b> 
+                                <br><br>
+                                {{prg.PARcontent}}
+
+                            {%  elif prg.PARtitle and prg.PARcontent and prg.PARimage %}
+                                <br><br>
+                                <b>{{prg.PARtitle}}</b> 
+                                <br><br>
+                                <center><img src="{{prg.PARimage.url}}" alt=""></center>
+                                <br><br>
+                                {{prg.PARcontent}}
+
+
+                            {%  elif  prg.PARcontent and not prg.PARtitle != None and not prg.PARimage %}
+                                <br><br>
+                                {{prg.PARcontent}}
+                                
+                            
+                            {% endif %}
+                            {%endfor%}
+                        </p>
+                        </div>
+                    </div>
+                <!--X- Blog Post -X-->
+
+                <!-- Blog-post-details -->
+                    <div class="publisher-details">
+                        {% if blog_post.BLGwriter.WRTRimage %}
+                            <img src="{{blog_post.BLGwriter.WRTRimage.url}}" alt="{{blog_post.BLGwriter.WRTRname}}" style="height:100px;">
+                        {% else %}
+                            <img src="{% static 'img\default\OIP.jpg' %}" alt="{{blog_post.BLGwriter.WRTRname}}" style="height:100px;">
+                        {% endif %}
+                        <div>
+                            <p>Written by</p>
+                            <h3>{{blog_post.BLGwriter.WRTRname|title}}</h3><br>
+                            <p>
+                                <span>
+                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
+                                </span>
+                                 {{blog_post.BLGwriter.WRTRbio|capfirst}} 
+                                <span><i class="fa fa-quote-right" aria-hidden="true"></i>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                <!--X- Blog-post-details -X-->
+                <!-- Blog Comments -->
+                <div class="commaints">
+                    <h2><span>{{ countCMT }}</span> Comments</h2>
+                    {% for cmt in cmts %}
+                        <div class="comments-row">
+                            <div class="comments-body">
+                                {% if cmt.CMTimage %}
+                                    <img src="{{ cmt.CMTimage.url }}" alt="{{cmt.CMTusername}}">
+                                {% else %}
+                                <img src="{% static 'img\default\OIP.jpg'%}" alt="{{cmt.CMTusername}}">
+                                {% endif %}
+                                <div>
+                                    <h3>{{cmt.CMTusername|title}}</h3>
+                                    <p>{{cmt.CMTdate|date:'d M, Y'}}</p>
+                                    <p>{{cmt.CMTcomment|capfirst}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!--X-Blog Comments  -X-->
+
+                <!-- Replay Section -->
+                    <form method="post" class="replay-form" enctype="multipart/form-data">
+                        {% csrf_token %} 
+                        <h3>Leave a Reply</h3>
+                        <div class="replay-input">
+                            {{form.username}}
+                        </div>
+                            
+                        <div class="repaly-in-email">
+                            {{form.email}}
+                        </div>
+                        <div class="contact-message">
+                            {{form.comment}}
+                        </div>
+                        <div class="replay-input">
+                            {{form.image}}
+                        </div>
+                        {% if error_msg %}
+                            <div class="repaly-in-email">
+                                <h6>{{error_msg}}</h6>
+                            </div>
+                        {% endif %}
+                        <div class="post-replay">
+                            <button type='submit' class="countact-submit-btn">Post Comment</button>
+                        </div>
+                        
+                    </form>
+                <!---X--Replay Section---X -->
+            </div>
+
+            <!-- Related Blog -->
+            <div class="related-blog">
+                <h3>Recent Posts</h3>
+                <div class="recent-post-column">
+                {% for ab in all_blog %}
+                            <div class="rcent-post">
+                                <img src="{{ab.BLGimage.url}}" alt="">
+                                <div class="recent-post-detailes">
+                                    <p>{{ab.BLGtitle}}</p>
+                                    <p><span>{{ab.BLGdate|date:"M d, Y"}}</span></p>
+                                </div>
+                            </div>
+                {% endfor %}
+                </div>
+            </div>
+            <!--X- Related Blog -X-->
+        </div>
+    <!-- ----------X-------Blog Body--------X-------------- -->
+
+    <!-- ---------------------Footer------------------------- -->
+        <div class="footer">
+            <div class="footer-row">
+                <h2>Tourisum</h2>
+                <h3>Blog</h3><br>
+                <p>&copy; Tourisum Blog ~ 2021. All rights reserved.</p>
+            </div>
+            <div class="developer">
+                <div class="develop-name">
+                    <p>Designed by ~ <span>Pruthviraj Rajput.</span></p>
+                </div>
+                <div class="developer-contact">
+                    <a href="#"><i class="fa fa-handshake-o" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-github" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    <!-- ------------X--------Footer--------X---------------- -->
+
+    <!-- --------Java Script File Link Here------------ -->
+    <script src="{% static 'js/script.js'%}"></script>
+    <!-- -X------Java Script File Link Here---X-------- -->
+</body>
+</html>

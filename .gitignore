@@ -1,0 +1,22 @@
+# Django-related files
+*.pyc
+*.pyo
+__pycache__/
+*.sqlite3
+
+# Static files
+src/static/
+
+
+# Environment variables
+*.env
+
+# Development server
+*.envrc
+
+# IDE-specific files
+.vscode/
+
+# Dependency directories
+venv/
+env/
