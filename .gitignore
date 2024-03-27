@@ -7,9 +7,11 @@ __pycache__/
 # Static files
 src/static/
 
+# Media files
+media/
 
 # Environment variables
-*.env
+config.py
 
 # Development server
 *.envrc
