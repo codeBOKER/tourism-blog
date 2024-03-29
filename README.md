@@ -22,7 +22,7 @@ I have create the torisum blog website front end this website responsive all dev
 
 #### 1. Create a Github account.
 #### 2. Open Command line interface in your pc
-#### 3. Copy The Repo URL [https://github.com/pruthvi7384/Tourism-Blogger.git](https://github.com/pruthvi7384/Tourism-Blogger.git).
+#### 3. Copy The Repo URL [https://github.com/codeBOKER/tourism-blog.git](https://github.com/codeBOKER/tourism-blog.git).
 
 
 ## HOW TO RUN THIS PROJECT
